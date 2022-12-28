@@ -1,0 +1,29 @@
+====================================================================================================
+CURSO WEB APP SPRING BOOT - THYMELEAF
+====================================================================================================
+
+
+Dependência
+----------------------------------------------------------------------------------------------------
+- Adicionar a dependência
+
+    ...
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-thymeleaf</artifactId>
+    </dependency>
+    ...
+
+
+Ajustando o Thymeleaf
+----------------------------------------------------------------------------------------------------
+- Acrescentar as configurações no arquivo 'application.yml'
+
+  ... 
+  thymeleaf:
+    mode: html
+    cache: false
+  ...
+
+
+

@@ -1,0 +1,99 @@
+====================================================================================================
+CURSO WEB APP SPRING BOOT - DATABASE
+====================================================================================================
+
+
+Database
+----------------------------------------------------------------------------------------------------
+- Conectar no console do servidor do MySQL e executar os seguintes comandos:
+
+
+CREATE DATABASE contactbook;
+
+USE contactbook;
+
+CREATE TABLE contacts (
+  id INTEGER NOT NULL AUTO_INCREMENT,
+  name VARCHAR(80) NOT NULL,
+  email VARCHAR(80) NOT NULL,
+  birthday DATE NOT NULL,
+  PRIMARY KEY (id)
+);
+
+
+Dependências
+----------------------------------------------------------------------------------------------------
+- Adicionar as dependências 
+
+  ...
+  <dependency>
+    <groupId>mysql</groupId>
+    <artifactId>mysql-connector-java</artifactId>
+  </dependency>
+  <dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-data-jpa</artifactId>
+  </dependency>  
+  ...
+
+
+Acesso
+----------------------------------------------------------------------------------------------------
+- Criar o arquivo 'application.yml' no folder 'src/main/resources'
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/contactbook
+    username: root
+    password: root
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+    hibernate:
+      ddl-auto: none    
+
+
+Model
+----------------------------------------------------------------------------------------------------
+- Criar o pacote 'com.ctseducare.taskbook.model'
+
+- Criar o arquivo 'Task.java'
+
+@Entity
+@Table(name = "contacts")
+public class Contact implements Serializable {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
+    private Integer id;
+    
+    @Column(name = "name", length = 100, nullable = false)
+    private String name;
+    
+    @Column(name = "email", length = 100, nullable = false)
+    private String email;
+    
+    @Column(name = "birthday", nullable = false)
+    private LocalDate birthday;
+    
+    // Getters and Setters
+    
+    // Equals and HashCode
+    
+}
+
+
+Repository
+----------------------------------------------------------------------------------------------------
+- Criar o pacote 'com.ctseducare.taskbook.repository'
+
+- Criar o arquivo 'ContactRepository.java'
+
+public interface ContactRepository extends JpaRepository<Contact, Integer> {
+
+}
+
+

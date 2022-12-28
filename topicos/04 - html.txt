@@ -1,0 +1,66 @@
+====================================================================================================
+CURSO WEB APP SPRING BOOT - HTML
+====================================================================================================
+
+
+Dependência
+----------------------------------------------------------------------------------------------------
+- Adicionar a dependência
+
+    ...
+    <dependency>
+      <groupId>org.webjars</groupId>
+      <artifactId>bootstrap</artifactId>
+      <version>3.3.7</version>
+    </dependency>
+    ...
+
+
+Template
+----------------------------------------------------------------------------------------------------
+- Criar o folder 'templates' na pasta 'src/main/resources'
+
+- Criar o arquivo 'Contact.html' no folder 'templates'
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width" />
+  <title>Contact Book</title>
+  <link th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}" rel="stylesheet"/>
+  <link th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap-theme.min.css}" rel="stylesheet"/>
+</head>
+<body>
+  <h1>Contact Book</h1>
+</body>
+</html>
+
+
+Controller
+----------------------------------------------------------------------------------------------------
+- Criar o pacote 'com.ctseducare.contactbook.controller'
+
+- Criar a classe 'ContactController' com o conteúdo abaixo.
+
+@Controller
+public class ContactController {
+
+    @GetMapping("/contacts")
+    public String findAll() {
+        return "Contact";
+    }
+
+}
+
+Obs1: Num framework 'action based' a requisição é entregue ao controller. O controller processará
+a requisição e retornará o nome da 'view' ao framework para ser renderizada ao cliente.
+
+
+Verificando
+----------------------------------------------------------------------------------------------------
+- Iniciar a aplicação
+
+- Acessar o endereço http://localhost:8080/contacts
+
+

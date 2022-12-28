@@ -1,0 +1,67 @@
+====================================================================================================
+CURSO WEB APP SPRING BOOT - INSERINDO
+====================================================================================================
+
+
+Formulário
+----------------------------------------------------------------------------------------------------
+- Adicionar as seguintes linhas logo acima da tabela do arquivo 'Contact.html'
+
+      ...
+      <form class="form-inline" method="POST" style="margin: 20px 0">
+        <input type="text" class="form-control" placeholder="Nome"/>
+        <input type="text" class="form-control" placeholder="Email"/>
+        <input type="text" class="form-control" placeholder="Aniversário"/>
+        <input type="submit" class="form-control btn-primary" value="Salvar"/>
+      </form>
+      ...
+
+
+Controller
+----------------------------------------------------------------------------------------------------
+- Adicionar a seguinte linha no método 'listAll' da classe 'ContactController'
+
+    ...
+    modelAndView.addObject("contact", new Contact());
+    ...
+
+- Adicionar o método 'save' na classe 'ContactControlle'
+
+    ...
+    @PostMapping("/contacts")
+    public String save(Contact contact) {
+        repository.save(contact);
+        return "redirect:/contacts";
+    }
+    ...
+
+
+Configurando o formulário
+----------------------------------------------------------------------------------------------------
+- Para o Thymeleaf usar o objeto 'contact' no formulário, é necessário adicionar o atributo th:object
+  na tag 'form' conforme abaixo.
+
+  <form class="form-inline" method="POST" style="margin: 20px 0" th:object="${contact}">
+
+- Para vincular os atributos do objeto 'contact' com os campos do formulário é necessário adicionar o
+  atributo 'th:field' nas tags 'inputs'
+
+      ...
+      <input type="text" class="form-control" placeholder="Nome" th:field="*{name}"/>
+      <input type="text" class="form-control" placeholder="Email" th:field="*{email}"/>
+      <input type="text" class="form-control" placeholder="Aniversário" th:field="*{birthday}"/>
+      ...
+
+- Para enviar os dados do formulário ao controller é preciso adicionar o atributo 'th:action' na tag
+  'form'
+
+  <form class="form-inline" method="POST" style="margin: 20px 0" th:object="${contact}" th:action="@{/contacts}">
+
+
+Verificando
+----------------------------------------------------------------------------------------------------
+- Iniciar a aplicação
+
+- Acessar o endereço http://localhost:8080/contacts
+
+
